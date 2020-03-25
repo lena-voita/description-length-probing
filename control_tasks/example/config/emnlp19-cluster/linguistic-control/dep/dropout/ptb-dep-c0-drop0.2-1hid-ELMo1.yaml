@@ -1,0 +1,65 @@
+dataset:
+  observation_fieldnames:
+     - index
+     - sentence
+     - lemma_sentence
+     - upos_sentence
+     - xpos_sentence
+     - morph
+     - head_indices
+     - governance_relations
+     - secondary_relations
+     - extra_info
+     - embeddings
+  corpus:
+    root: /u/scr/nlp/johnhew/data/lstm-word-order/ptb-wsj-sd/
+    train_path: ptb3-wsj-train.conllx
+    dev_path: ptb3-wsj-dev.conllx
+    test_path: ptb3-wsj-test.conllx
+  embeddings:
+    type: token #{token,subword}
+    root: /u/scr/nlp/johnhew/data/lstm-word-order/ptb-wsj-sd/
+    train_path: raw.train.elmo-layers.hdf5
+    dev_path: raw.dev.elmo-layers.hdf5
+    test_path: raw.test.elmo-layers.hdf5
+  batch_size: 10
+  dataset_size: 40000
+model:
+  hidden_dim: 1024 # ELMo hidden dim
+  #embedding_dim: 1024 # ELMo word embedding dim
+  model_type: ELMo-disk # BERT-disk, ELMo-disk, 
+  use_disk: True
+  model_layer: 1 # BERT-base: {1,...,12}; ELMo: {1,2,3}
+probe:
+  task_signature: word_pair_label # word, word_pair
+  task_name: corrupted-edge-labels
+  maximum_rank: 1000
+  psd_parameters: True
+  diagonal: False
+  hidden_layers: 0
+  dropout: 0.2
+  params_path: predictor.params
+  misc:
+    rand_label_condition_length: 1
+    corrupted_token_percent: 0.0
+  probe_spec:
+    probe_type: MLP
+    probe_hidden_layers: 1
+probe_training:
+  epochs: 40
+  loss: cross-entropy
+  weight_decay: 0.0
+reporting:
+  root: /u/scr/nlp/johnhew/results/naacl19/
+  observation_paths:
+    train_path: train.observations
+    dev_path: dev.observations
+    test_path: test.observations
+  prediction_paths:
+    train_path: train.predictions
+    dev_path: dev.predictions
+    test_path: test.predictions
+  reporting_methods:
+    - uas
+    - placeholder
+    - placeholder
