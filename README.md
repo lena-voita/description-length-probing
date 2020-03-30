@@ -2,7 +2,7 @@
 
 <img src="resources/probe_main_orange-min.png" width="350" align="right">
 
-This is the official repo for the paper [Information-Theoretic Probing with Minimum Description Length]().
+This is the official repo for the paper [Information-Theoretic Probing with Minimum Description Length](https://arxiv.org/pdf/2003.12298.pdf).
 
 Read the official [blog post](https://lena-voita.github.io/posts/mdl_probes.html) for the details!
 
