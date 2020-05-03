@@ -35,7 +35,7 @@ regimen:
 probe:
   task_signature: word_label 
   type: none # none
-  task_name: part-of-speech
+  task_name: corrupted-part-of-speech
   maximum_rank: 1000                # CHANGE THIS (IF YOU REALLY WANT)
   psd_parameters: True
   diagonal: False
