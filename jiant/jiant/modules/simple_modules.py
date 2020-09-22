@@ -47,7 +47,6 @@ class Pooler(nn.Module):
 
 
 #---------------------------------------------------------------
-# Lena
 
 from jiant import BayesianLayers
 

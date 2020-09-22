@@ -1522,10 +1522,8 @@ class SamplingMultiTaskTrainerBayes(SamplingMultiTaskTrainer):
                     "loss" in output_dict, "Model must return a dict containing a 'loss' key"
                 )
                 #------------------------------------------------------------------------
-                # Lena
                 kl = sum([mod.kl_divergence() for mod in bayes_modules])
                 loss = output_dict["loss"] + kl / num_examples
-                # Lena
                 # ------------------------------------------------------------------------
                 loss *= scaling_weights[task.name]
                 loss.backward()
@@ -1689,11 +1687,12 @@ class SamplingMultiTaskTrainerOnlineCoding(SamplingMultiTaskTrainer):
                  online_coding_pre_shuffle, online_coding_pre_shuffle_seed, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Lena
+
+        # online coding
         self.online_coding_load_checkpoint = online_coding_load_checkpoint
         self.online_coding_portion_split = online_coding_portion_split
 
-        # Almost Lena
+        # shuffle data
         self.online_coding_pre_shuffle = online_coding_pre_shuffle
         self.online_coding_pre_shuffle_seed = online_coding_pre_shuffle_seed
 
